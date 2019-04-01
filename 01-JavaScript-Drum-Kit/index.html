@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JS Drum Kit</title>
+</head>
+<body>
+    <!-- keycode.info for event.key values on your data-key attr
+        A - 65 --
+        S - 83 --
+        D - 68 --
+        F - 70 --
+        G - 71 --
+        H - 72 --
+        J - 74 --
+        K - 75 --
+        L - 76
+    -->
+    <div class="keys">
+        <div data-key="65" class="key">
+            <kbd>A</kbd>
+            <span class="sound">clap</span>
+        </div>
+        <div data-key="83" class="key">
+            <kbd>S</kbd>
+            <span class="sound">hihat</span>
+        </div>
+        <div data-key="68" class="key">
+            <kbd>D</kbd>
+            <span class="sound">kick</span>
+        </div>
+        <div data-key="70" class="key">
+            <kbd>F</kbd>
+            <span class="sound">openhat</span>
+        </div>
+        <div data-key="71" class="key">
+            <kbd>G</kbd>
+            <span class="sound">boom</span>
+        </div>
+        <div data-key="72" class="key">
+            <kbd>H</kbd>
+            <span class="sound">ride</span>
+        </div>
+        <div data-key="74" class="key">
+            <kbd>J</kbd>
+            <span class="sound">snare</span>
+        </div>
+        <div data-key="75" class="key">
+            <kbd>K</kbd>
+            <span class="sound">tom</span>
+        </div>
+        <div data-key="76" class="key">
+            <kbd>L</kbd>
+            <span class="sound">tink</span>
+        </div>
+    </div>
+    <!--You're gonna have to input all of the audio files and link them to below audio elements-->
+    <audio data-key="65" src="#"></audio>
+
+
+<script>
+    window.addEventListener('keydown', function(e) {
+        //Is there an audio element on the page that has a data-key of 65?
+        //The brackets next to the element selector specify the attribute for such element.
+        const audio = document.querySelector(`audio[data-key='${e.keyCode}']`)
+    })
+</script>
+
+</body>
+</html>
