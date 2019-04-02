@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>JS Drum Kit</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <!-- keycode.info for event.key values on your data-key attr
         A - 65 --
@@ -53,20 +56,52 @@
         </div>
         <div data-key="76" class="key">
             <kbd>L</kbd>
-            <span class="sound">tink</span>
+            <span class="sound">rim</span>
         </div>
     </div>
     <!--You're gonna have to input all of the audio files and link them to below audio elements-->
-    <audio data-key="65" src="#"></audio>
+    <audio data-key="65" src="sounds/CYCdh_K6-ClHat.wav"></audio>
+    <audio data-key="83" src="sounds/Acoustic Hat-01.wav"></audio>
+    <audio data-key="68" src="sounds/CYCdh_AcouKick-01.wav"></audio>
+    <audio data-key="70" src="sounds/CYCdh_Kurz01-HfHat.wav"></audio>
+    <audio data-key="71" src="sounds/CYCdh_K2room_Flam-01.wav"></audio>
+    <audio data-key="72" src="sounds/CYCdh_VinylK4-Ride02.wav"></audio>
+    <audio data-key="74" src="sounds/Acoustic Snare-01.wav"></audio>
+    <audio data-key="75" src="sounds/CYCdh_VinylK4-Tom01.wav"></audio>
+    <audio data-key="76" src="sounds/CYCdh_K1close_Rim-01.wav"></audio>
 
 
-<script>
-    window.addEventListener('keydown', function(e) {
-        //Is there an audio element on the page that has a data-key of 65?
-        //The brackets next to the element selector specify the attribute for such element.
-        const audio = document.querySelector(`audio[data-key='${e.keyCode}']`)
-    })
-</script>
+    <script>
+        //=== Now that the keydown on a letter adds a class to animate, we need the border to erase for a certain time period.
+        //We implement a transition-end event that works like an on-click event
+        function playSound(e) {
+            //The brackets next to the element selector specify the attribute for such element.
+            const audio = document.querySelector(`audio[data-key='${e.keyCode}']`); // variable to find the audio element attach to each audio key
+            const key = document.querySelector(`.key[data-key='${e.keyCode}']`); //find the key element attach to audio keys
+
+            if (!audio) { return } //stop the function from running altogether
+            audio.currentTime = 0;//Plays audio upon key press even if the audio was already playing
+            audio.play();
+            key.classList.add('playing'); //similar to jQuery's key.addClass('playing');
+        }
+        function removeTransition(e) {
+            if(e.propertyName !== 'transform') return; //skip it if it's not a transform
+            this.classList.remove('playing');
+            //Once animated, transitionend will fire which will then removeTransition of class 'playing' to fade itself out
+        }
+        
+
+        const keys = document.querySelectorAll('.key');
+        //We want to loop through each key to get a eventListenser to be added to it, which is 'transitionend'
+        //When a transition is ending, we will remove it
+        keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+        window.addEventListener('keydown',playSound);
+
+
+        //WHAT WE LEARNED!
+        // - Key events and playing audio upon them. Listening for transition-end event and using that on animations.
+    </script>
 
 </body>
+
 </html>
