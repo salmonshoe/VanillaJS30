@@ -40,7 +40,7 @@ html {
     position: absolute;
     top: 50%;
     transform-origin: 100%; /* How do I get a grip of this transform attribute?*/
-    transform: rotate(90deg); /*It seriously looks like something you can do to make your work stand out*/
+    transform: rotate(90deg); 
     transition: all 0.05s;
     transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
   }
