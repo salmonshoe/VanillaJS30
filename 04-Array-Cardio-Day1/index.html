@@ -24,7 +24,7 @@
             { first: 'Johannes', last: 'Kepler', year: 1571, passed: 1630 },
             { first: 'Nicolaus', last: 'Copernicus', year: 1473, passed: 1543 },
             { first: 'Max', last: 'Planck', year: 1858, passed: 1947 },
-            { first: 'Katherine', last: 'Blodgett', year: '1898', passed: 1979 },
+            { first: 'Katherine', last: 'Blodgett', year: 1898, passed: 1979 },
             { first: 'Ada', last: 'Lovelace', year: 1815, passed: 1852 },
             { first: 'Sarah E.', last: 'Goode', year: 1855, passed: 1905 },
             { first: 'Lise', last: 'Meitner', year: 1878, passed: 1968 },
@@ -72,19 +72,46 @@
         console.log(totalYears); //I really don't understand the reduce method here!
 
         //5. Sort the inventors by years lived
-        //const oldest = inventors.sort((a, b) => )
+        const oldest = inventors.sort(function(a, b) {
+            const lastGuy = a.passed - a.year;
+            const nextGuy = b.passed - b.year;
+            // if(lastGuy < nextGuy) {
+            //     return 1;
+            // } else {
+            //     return -1;
+            // }
+            return lastGuy < nextGuy ? 1 : -1;
+        });
+        console.table(oldest);
 
         //6. Create a list of Boulevards in Paris that contain 'de' anywhere in the name
         //https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+            // const whatCategory = document.querySelector('.mw-category'); //select the class all street names fall under
+            // const links = Array.from(whatCategory.querySelectorAll('a')); //create an array from the links you took
+            // const de = links
+            //     .map(frenchStreets => frenchStreets.textContent)
+            //     .filter(streetName => streetName.includes('de'));
 
         //7. Sort Exercise
         //Sort the people alphabetically by last name
+        const alpha = people.sort((lastOne, nextOne) => {
+            const [aLast, aFirst] = lastOne.split(', ');
+            const [bLast, bFirst] = nextOne.split (', ');
+            return aLast > bLast ? 1 : -1;
+        });
+        console.log(alpha);
 
         //8. Reduce Exercise
         //Sum up the instances alphabetically by last name
-        // const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
-
-
+        const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+        const transportation = data.reduce(function(obj, item) {
+            if (!obj[item]) {
+                obj[item] = 0;
+            }
+            obj[item]++;
+            return obj;
+        }, {})
+        console.log(transportation);
 
     </script>
 </body>
